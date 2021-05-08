@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - test-build
 
 env:
   DOCKER_CLI_EXPERIMENTAL: enabled
@@ -11,14 +12,10 @@ env:
 jobs:
   build:
     name: Build electrs image
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
-          - linux/arm/v7
         version:
           - v0.8.9
     steps:
@@ -39,6 +36,6 @@ jobs:
       - name: Run Docker buildx
         run: |
           docker buildx build \
-          --platform ${{matrix.platform}} \
+          --platform linux/amd64,linux/arm64 \
           --build-arg VERSION=${{matrix.version}} \
           --tag electrs:${{matrix.version}} .
