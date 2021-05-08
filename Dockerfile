@@ -5,8 +5,8 @@ FROM rust:1.44.1-slim-buster as builder
 WORKDIR /build
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends clang=1:7.* cmake=3.* \
-    libsnappy-dev=1.* \
+    && apt-get install -y --no-install-recommends clang cmake git \
+    libsnappy-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
