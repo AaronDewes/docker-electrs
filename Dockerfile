@@ -1,6 +1,6 @@
 ARG VERSION=v0.8.9
 
-FROM rust:1.44.1-slim-buster as builder
+FROM rust:1.52.0-slim-buster as builder
 
 ARG VERSION
 
